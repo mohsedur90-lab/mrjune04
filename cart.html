@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart - Papa's Restaurant</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        input, textarea { width: 100%; padding: 10px; margin: 10px 0; }
+        button { padding: 10px; background: #ff4d4d; color: white; border: none; width: 100%; }
+    </style>
+</head>
+
+<body>
+
+<h2>Your Cart</h2>
+
+<p id="cartItem"></p>
+
+<h3>Delivery Details</h3>
+
+<input type="text" id="name" placeholder="Your Name">
+<input type="number" id="phone" placeholder="Phone Number">
+<input type="number" id="pincode" placeholder="Pin Code">
+<textarea id="address" placeholder="Full Address"></textarea>
+
+<button onclick="goToPayment()">Proceed to Payment</button>
+
+<script>
+document.getElementById("cartItem").innerHTML =
+    "Item: " + localStorage.getItem("cartItem");
+
+function goToPayment() {
+    window.location.href = "payment.html";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login Portal</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+    background: linear-gradient(135deg, #000000, #3a0000, #8b0000);
+    background-size: 400% 400%;
+    animation: bgAnimation 10s infinite alternate;
+    color: white;
+}
+
+@keyframes bgAnimation {
+    0% { background-position: left; }
+    100% { background-position: right; }
+}
+
+.center-box {
+    width: 90%;
+    max-width: 400px;
+    background: rgba(255,255,255,0.08);
+    padding: 25px;
+    margin: 90px auto;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 25px rgba(255,0,0,0.4);
+    animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    font-size: 17px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #ff1a1a;
+    color: white;
+    transition: 0.3s;
+    box-shadow: 0 0 12px rgba(255,0,0,0.7);
+}
+
+button:hover {
+    background: #ff4444;
+    transform: scale(1.05);
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: none;
+}
+
+.login-box {
+    display: none;
+}
+
+.back-btn {
+    background: #333;
+    margin-top: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MAIN SELECTION PAGE -->
+<div class="center-box" id="mainBox">
+    <h2>Select Login Type</h2>
+
+    <button onclick="openLogin('user')">👤 User Login / Register</button>
+    <button onclick="openLogin('restaurant')">🍴 Restaurant Login</button>
+    <button onclick="openLogin('delivery')">🚴 Delivery Boy Login</button>
+</div>
+
+<!-- USER LOGIN -->
+<div class="center-box login-box" id="userBox">
+    <h2>User Login / Register</h2>
+
+    <input type="text" id="uName" placeholder="Full Name">
+    <input type="text" id="uPhone" placeholder="Phone Number">
+    <input type="password" id="uPass" placeholder="Password">
+
+    <button onclick="registerUser()">Register</button>
+    <button onclick="loginUser()">Login</button>
+
+    <button class="back-btn" onclick="goBack()">⬅ Back</button>
+</div>
+
+<!-- RESTAURANT LOGIN -->
+<div class="center-box login-box" id="restaurantBox">
+    <h2>Restaurant Login</h2>
+
+    <input type="email" id="rEmail" placeholder="Restaurant Email">
+    <input type="password" id="rPass" placeholder="Password">
+
+    <button onclick="loginRestaurant()">Login</button>
+
+    <button class="back-btn" onclick="goBack()">⬅ Back</button>
+</div>
+
+<!-- DELIVERY BOY LOGIN -->
+<div class="center-box login-box" id="deliveryBox">
+    <h2>Delivery Boy Login</h2>
+
+    <input type="text" id="dName" placeholder="Name">
+    <input type="text" id="dVehicle" placeholder="Vehicle Number">
+    <input type="password" id="dPass" placeholder="Password">
+
+    <button onclick="loginDelivery()">Login</button>
+
+    <button class="back-btn" onclick="goBack()">⬅ Back</button>
+</div>
+
+<script>
+function openLogin(type) {
+    document.getElementById("mainBox").style.display = "none";
+    document.getElementById(type + "Box").style.display = "block";
+}
+
+function goBack() {
+    document.querySelectorAll(".login-box").forEach(box => box.style.display = "none");
+    document.getElementById("mainBox").style.display = "block";
+}
+
+/* USER REGISTER & LOGIN */
+function registerUser() {
+    localStorage.setItem("userName", document.getElementById("uName").value);
+    localStorage.setItem("userPhone", document.getElementById("uPhone").value);
+    localStorage.setItem("userPass", document.getElementById("uPass").value);
+
+    alert("User Registered!");
+}
+
+function loginUser() {
+    let phone = document.getElementById("uPhone").value;
+    let pass  = document.getElementById("uPass").value;
+
+    if (phone === localStorage.getItem("userPhone") &&
+        pass === localStorage.getItem("userPass")) {
+        alert("User Login Successful!");
+    } else {
+        alert("Invalid User Login!");
+    }
+}
+
+/* RESTAURANT LOGIN */
+function loginRestaurant() {
+    if (document.getElementById("rEmail").value === "admin@papa.com" &&
+        document.getElementById("rPass").value === "123456") {
+        alert("Restaurant Login Successful!");
+    } else {
+        alert("Restaurant Login Failed!");
+    }
+}
+
+/* DELIVERY LOGIN */
+function loginDelivery() {
+    let name = document.getElementById("dName").value;
+    let veh  = document.getElementById("dVehicle").value;
+    let pass = document.getElementById("dPass").value;
+
+    if (name && veh && pass) {
+        alert("Delivery Boy Login Successful!");
+    } else {
+        alert("Fill All Fields!");
+    }
+}
+</script>
+
+</body>
+</html>

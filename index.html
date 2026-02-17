@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MR's Food Delivery App</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    background:#fafafa;
+}
+
+/* HEADER */
+header{
+    width:100%;
+    padding:15px 40px;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid #eee;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo img{
+    width:45px;
+}
+
+.logo h1{
+    font-size:1.8em;
+    color:#e23744;
+    font-weight:700;
+}
+
+.search-box{
+    width:40%;
+}
+
+.search-box input{
+    width:100%;
+    padding:12px 15px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:1em;
+}
+
+.nav{
+    display:flex;
+    gap:25px;
+}
+
+.nav a{
+    text-decoration:none;
+    color:#333;
+    font-size:1.1em;
+    font-weight:500;
+}
+
+/* RESTAURANT GRID */
+.container{
+    padding:40px;
+}
+
+.section-title{
+    font-size:1.6em;
+    margin-bottom:20px;
+    font-weight:600;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+    gap:25px;
+}
+
+/* RESTAURANT CARD */
+.card{
+    background:white;
+    border-radius:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.07);
+    overflow:hidden;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.card .info{
+    padding:15px;
+}
+
+.info h3{
+    font-size:1.3em;
+    font-weight:600;
+}
+
+.badges{
+    margin:10px 0;
+    display:flex;
+    gap:10px;
+}
+
+.badge-offer{
+    background:#e23744;
+    color:white;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:0.8em;
+}
+
+.badge-live{
+    background:#ff2b63;
+    color:white;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:0.8em;
+    animation: pulse 1s infinite;
+}
+
+/* LIVE PULSE EFFECT */
+@keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(255,43,99,0.7); }
+    70%{ box-shadow:0 0 0 10px rgba(255,43,99,0); }
+    100%{ box-shadow:0 0 0 0 rgba(255,43,99,0); }
+}
+
+.status{
+    margin-top:5px;
+    font-size:0.9em;
+    color:green;
+}
+
+.status.closed{
+    color:red;
+}
+
+/* VIDEO SECTION */
+.video-section{
+    padding:40px;
+    margin-top:20px;
+}
+
+.video-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
+    gap:25px;
+}
+
+.video-card iframe,
+.video-card video{
+    width:100%;
+    height:200px;
+    border-radius:12px;
+}
+
+/* FOOTER */
+footer{
+    background:#111;
+    color:#ddd;
+    padding:50px 40px 20px;
+    margin-top:50px;
+}
+
+.footer-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:40px;
+}
+
+.footer-col h3{
+    color:#e23744;
+    font-size:1.8em;
+    margin-bottom:15px;
+}
+
+.footer-col h4{
+    color:#fff;
+    margin-bottom:15px;
+    font-size:1.2em;
+}
+
+.footer-col p,
+.footer-col a{
+    color:#ccc;
+    font-size:0.95em;
+    text-decoration:none;
+    display:block;
+    margin-bottom:8px;
+}
+
+.footer-col a:hover{
+    color:#e23744;
+}
+
+.social-icons{
+    display:flex;
+    gap:12px;
+    margin-top:15px;
+}
+
+.social-icons img{
+    width:32px;
+    filter:invert(1);
+    transition:0.3s;
+}
+
+.social-icons img:hover{
+    transform:scale(1.1);
+    filter:invert(32%) sepia(100%) saturate(600%) hue-rotate(350deg);
+}
+
+.app-download img{
+    width:130px;
+    margin:10px 0;
+    background:white;
+    border-radius:10px;
+}
+
+.newsletter input{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:6px;
+    margin-bottom:10px;
+}
+
+.newsletter button{
+    width:100%;
+    padding:10px;
+    border:none;
+    background:#e23744;
+    color:white;
+    border-radius:6px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.footer-bottom{
+    text-align:center;
+    margin-top:30px;
+    padding-top:20px;
+    border-top:1px solid #333;
+    font-size:0.9em;
+    color:#888;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png">
+        <h1>MR</h1>
+    </div>
+
+    <div class="search-box">
+        <input type="text" placeholder="Search for restaurant or dish...">
+    </div>
+
+    <div class="nav">
+        <a href="#">Help</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Videos</a>
+        <a href="login.html">Login</a>
+    </div>
+</header>
+
+<!-- RESTAURANTS -->
+<div class="container">
+    <h2 class="section-title">Popular Restaurants</h2>
+
+    <div class="grid">
+
+        <!-- Restaurant Cards -->
+        <div class="card">
+            <a href="papas-resturent.html">
+            <img src="D:\All Website\local app new\images\pizza.jpeg" >
+            </a>
+            <div class="info">
+                <h3>Papa's Pizza</h3>
+                <div class="badges">
+                    <span class="badge-offer">20% OFF</span>
+                    <span class="badge-live">LIVE</span>
+                </div>
+                <p class="status">Open Now</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="D:\All Website\local app new\images\b lag.jpeg">
+            <div class="info">
+                <h3>Burger Hub</h3>
+                <div class="badges">
+                    <span class="badge-offer">Free Delivery</span>
+                </div>
+                <p class="status closed">Closed</p>
+            </div>
+        </div>
+        <!-- 50 Restaurant Cards -->
+
+<div class="card">
+    <img src="D:\All Website\local app new\images\berger.jpeg">
+    <div class="info">
+        <h3>Italiano Delight</h3>
+        <div class="badges"><span class="badge-offer">10% OFF</span></div>
+        <p class="status">Open Now</p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="D:\All Website\local app new\images\lag.jpeg">
+    <div class="info">
+        <h3>Smash Burger House</h3>
+        <div class="badges"><span class="badge-live">LIVE</span></div>
+        <p class="status">Open Now</p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="D:\All Website\local app new\images\a.jpeg">
+    <div class="info">
+        <h3>Royal Biryani Palace</h3>
+        <div class="badges"><span class="badge-offer">Free Delivery</span></div>
+        <p class="status">Open Now</p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="D:\All Website\local app new\images\b.jpeg">
+    <div class="info">
+        <h3>Dragon Wok</h3>
+        <p class="status closed">Closed</p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="D:\All Website\local app new\images\c.jpeg">
+    <div class="info">
+        <h3>Sub Station</h3>
+        <p class="status">Open Now</p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="D:\All Website\local app new\images\d.jpeg">
+    <div class="info">
+        <h3>Brew Cafe</h3>
+        <p class="status">Open Now</p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="D:\All Website\local app new\images\e.jpeg">
+    <div class="info">
+        <h3>Sweet Treats</h3>
+        <p class="status">Open Now</p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="D:\All Website\local app new\images\f.jpeg">
+    <div class="info">
+        <h3>Taco Fiesta</h3>
+        <p class="status">Open Now</p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="D:\All Website\local app new\images\singera.jpeg">
+    <div class="info">
+        <h3>Noodle Bar</h3>
+        <p class="status">Open Now</p>
+    </div>
+</div>
+
+<div class="card">
+    <img src="D:\All Website\local app new\images\misa.jpeg">
+    <div class="info">
+        <h3>Ice Cream World</h3>
+        <p class="status">Open Now</p>
+    </div>
+</div>
+
+
+    </div>
+</div>
+
+<!-- VIDEO SECTION -->
+<div class="video-section">
+    <h2 class="section-title">Trending Food Videos</h2>
+
+    <div class="video-grid">
+
+        <div class="video-card">
+            <iframe src="D:\FAV SONG\Y2meta.app-Mitraz Mashup (Mehboob X Laaya X Filhaal X Gulaab X Judaai) _ Morphine Music _ @MITRAZ-(1080p).mp4"
+                frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="video-card">
+            <video controls>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            </video>
+        </div>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-container">
+
+        <div class="footer-col">
+            <h3>Foodio</h3>
+            <p>Your favourite food delivery partner. Fast, fresh & reliable.</p>
+            <div class="social-icons">
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#">About Us</a>
+            <a href="#">Careers</a>
+            <a href="#">Blog</a>
+            <a href="#">Press</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Help & Support</h4>
+            <a href="#">FAQs</a>
+            <a href="#">Customer Support</a>
+            <a href="#">Refund Policy</a>
+            <a href="#">Terms & Conditions</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <p>Email: support@foodio.com</p>
+            <p>Phone: +91 7002299715</p>
+            <p>Address: Alomganj, Dhubri, 783339, India</p>
+            <div class="app-download">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/Download_on_the_App_Store_Badge.svg">
+            </div>
+        </div>
+
+        <div class="footer-col newsletter">
+            <h4>Newsletter</h4>
+            <p>Subscribe for exclusive offers:</p>
+            <input type="email" placeholder="Enter your email">
+            <button>Subscribe</button>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Foodio — All Rights Reserved.
+    </div>
+</footer>
+
+</body>
+</html>

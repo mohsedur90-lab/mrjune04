@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papa's Restaurant</title>
+
+    <style>
+        body { margin: 0; font-family: Arial; background: #f7f7f7; }
+
+        /* HEADER */
+        header {
+            background: #ff4d4d;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        header .logo { font-size: 24px; font-weight: bold; }
+
+        /* SEARCH BAR */
+        .search-container {
+            padding: 10px;
+            text-align: center;
+        }
+        .search-container input {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        /* VIDEO */
+        .video-banner {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* MENU ITEMS */
+        .menu-section {
+            padding: 20px;
+        }
+        .item-box {
+            display: inline-block;
+            width: 150px;
+            background: white;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px #ccc;
+            text-align: center;
+            cursor: pointer;
+        }
+        .item-box img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #222;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* CART POPUP */
+        #cartMsg {
+            background: #28a745;
+            color: white;
+            padding: 10px;
+            display: none;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">Papa's Restaurant</div>
+        <div>
+            <a href="profile.html" style="color:white; margin-right:15px;">Profile</a>
+            <a href="cart.html" style="color:white;">Cart</a>
+        </div>
+    </header>
+
+    <!-- SEARCH BAR -->
+    <div class="search-container">
+        <input type="text" placeholder="Search your favorite food...">
+    </div>
+
+    <!-- VIDEO -->
+    <video class="video-banner" autoplay muted loop>
+        <source src="foodvideo.mp4" type="video/mp4">
+    </video>
+
+    <!-- CART MESSAGE -->
+    <div id="cartMsg">Item Added To Cart!</div>
+
+    <!-- MENU -->
+    <div class="menu-section">
+        <h2>View Menu</h2>
+
+        <div class="item-box" onclick="addToCart('Pizza')">
+            <img src="images/pizza.jpeg">
+            <h4>Pizza</h4>
+            <p>₹180</p>
+        </div>
+
+        <div class="item-box" onclick="addToCart('Burger')">
+            <img src="images/burger.jpeg">
+            <h4>Burger</h4>
+            <p>₹120</p>
+        </div>
+
+        <div class="item-box" onclick="addToCart('Pasta')">
+            <img src="images/pasta.jpeg">
+            <h4>Pasta</h4>
+            <p>₹150</p>
+        </div>
+    </div>
+
+    <footer>
+        <h3>Papa's Restaurant</h3>
+        <p>About • Contact • Terms • Privacy</p>
+        <p>© 2024 Papa’s Restaurant</p>
+    </footer>
+
+
+    <script>
+        function addToCart(item) {
+            let msg = document.getElementById("cartMsg");
+            msg.style.display = "block";
+            setTimeout(() => { msg.style.display = "none"; }, 2000);
+
+            localStorage.setItem("cartItem", item);
+            window.location.href = "cart.html";
+        }
+    </script>
+
+</body>
+</html>

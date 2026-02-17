@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Restaurant Dashboard</title>
+<style>
+body{font-family:poppins;background:#f3f3f3;}
+.sidebar{
+    width:220px;
+    height:100vh;
+    background:#e23744;
+    color:white;
+    position:fixed;
+    padding:25px;
+}
+.sidebar a{
+    color:white;
+    text-decoration:none;
+    display:block;
+    margin:15px 0;
+    font-size:1.1em;
+}
+.main{
+    margin-left:240px;
+    padding:30px;
+}
+.card{
+    background:white;
+    padding:20px;
+    width:250px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    margin:10px;
+    display:inline-block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>Restaurant Admin</h2>
+    <a href="#">Orders</a>
+    <a href="#">Menu Items</a>
+    <a href="#">Add New Dish</a>
+    <a href="#">Offers</a>
+    <a href="#">Logout</a>
+</div>
+
+<div class="main">
+    <h1>Dashboard</h1>
+
+    <div class="card">Total Orders: 120</div>
+    <div class="card">Active Orders: 8</div>
+    <div class="card">Food Items: 24</div>
+</div>
+
+</body>
+</html>

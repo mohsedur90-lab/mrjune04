@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment</title>
+</head>
+<body style="font-family:Arial; padding:20px;">
+
+<h2>Pay with Razorpay</h2>
+
+<button style="padding:10px; background:#28a745; color:white; border:none;"
+        onclick="paymentSuccess()">
+    Pay Now
+</button>
+
+<script>
+function paymentSuccess() {
+    let orderId = "ORD" + Math.floor(Math.random()*100000);
+
+    localStorage.setItem("orderId", orderId);
+    window.location.href = "success.html";
+}
+</script>
+
+</body>
+</html>

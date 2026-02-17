@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order History</title>
+
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .status-box {
+            padding: 10px;
+            background: #f2f2f2;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        select {
+            padding: 8px;
+            width: 200px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Order History</h2>
+
+<p><b>Your Last Order ID:</b> <span id="historyId"></span></p>
+
+<p><b>Order Time:</b> <span id="orderTime"></span></p>
+
+<div class="status-box">
+    <b>Order Status:</b><br><br>
+
+    <select id="statusSelect" onchange="saveStatus()">
+        <option value="Accepted">✔️ Accepted</option>
+        <option value="Preparing">🧑‍🍳 Preparing</option>
+        <option value="Out for Delivery">🛵 Out for Delivery</option>
+        <option value="Delivered">✅ Delivered</option>
+        <option value="Cancelled">❌ Cancelled</option>
+    </select>
+</div>
+
+
+<script>
+    // Load order ID
+    document.getElementById("historyId").innerText =
+        localStorage.getItem("orderId");
+
+    // Load order time
+    document.getElementById("orderTime").innerText =
+        localStorage.getItem("orderTime");
+
+    // Load order status
+    let savedStatus = localStorage.getItem("orderStatus");
+    if (savedStatus) {
+        document.getElementById("statusSelect").value = savedStatus;
+    }
+
+    // Save updated status
+    function saveStatus() {
+        let status = document.getElementById("statusSelect").value;
+        localStorage.setItem("orderStatus", status);
+    }
+</script>
+
+</body>
+</html>

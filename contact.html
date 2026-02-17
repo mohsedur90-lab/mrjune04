@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Contact Us - MR Clone</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f8f8f8;
+}
+
+/* HEADER */
+header {
+    background: #ff4d4d;
+    padding: 15px 30px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 { margin: 0; }
+
+/* CONTACT */
+.contact-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #ddd;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.contact-box {
+    width: 48%;
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* LIVE MAP */
+#liveMap {
+    width: 100%;
+    height: 350px;
+    margin-top: 30px;
+    border-radius: 12px;
+}
+
+/* FOOTER */
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>MR Clone</h1>
+    <nav>
+        <a href="index.html" style="color:white; margin-right:20px;">Home</a>
+        <a href="contact.html" style="color:white;">Contact</a>
+    </nav>
+</header>
+
+<div class="contact-container">
+    <h2>Contact Us</h2>
+    <p>We’d love to help you! Feel free to reach out anytime.</p>
+
+    <div class="contact-info">
+
+        <div class="contact-box">
+            <strong>📞 Phone</strong>
+            <p>+91 7002299715</p>
+
+            <strong>📧 Email</strong>
+            <p>support@fooddelivery.com</p>
+
+            <strong>📍 Office Address</strong>
+            <p>Alomganj, Dhubri, 783339, Assam, India</p>
+        </div>
+
+        <div class="contact-box">
+            <strong>Send us a message</strong>
+            <form>
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email" required>
+                <input type="text" placeholder="Phone" required>
+                <textarea rows="4" placeholder="Message"></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+    </div>
+
+    <h3 style="margin-top:30px; color:#ff4d4d;">📍 Your Live Location</h3>
+
+    <!-- REAL-TIME LIVE MAP -->
+    <div id="liveMap"></div>
+</div>
+
+<footer>
+    <p>© 2025 Food Delivery App | Help • Privacy • Terms</p>
+</footer>
+
+<!-- GOOGLE MAPS SCRIPT -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
+
+<script>
+let map, marker;
+
+/* INIT MAP */
+function initMap(lat = 19.0760, lng = 72.8777) {
+    map = new google.maps.Map(document.getElementById("liveMap"), {
+        center: { lat, lng },
+        zoom: 14,
+    });
+
+    marker = new google.maps.Marker({
+        position: { lat, lng },
+        map: map,
+        title: "You are here",
+        animation: google.maps.Animation.BOUNCE,
+    });
+}
+
+/* REAL-TIME GPS TRACKING */
+function trackLocation() {
+    if (!navigator.geolocation) {
+        alert("Your device does not support location access.");
+        return;
+    }
+
+    navigator.geolocation.watchPosition((pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+
+        marker.setPosition({ lat, lng });
+        map.setCenter({ lat, lng });
+    }, 
+    () => {
+        alert("Please enable location services.");
+    });
+}
+
+/* START */
+initMap();
+trackLocation();
+</script>
+
+</body>
+</html>
